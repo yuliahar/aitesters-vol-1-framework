@@ -1,0 +1,28 @@
+import { expect, test } from "@playwright/test";
+import { LoginPage } from "../src/pages/LoginPage";
+import { ProfilePage } from "../src/pages/ProfilePage";
+import { HomePage } from "../src/pages/HomePage";
+
+test.describe("Login E2E", () => {
+  test(
+    "should login, verify profile sections, and logout successfully",
+    { tag: ["@auth", "@login", "@session", "@logout", "@happy-path"] },
+    async ({ page }) => {
+      const loginPage = new LoginPage(page);
+      const profilePage = new ProfilePage(page);
+      const homePage = new HomePage(page);
+
+      await loginPage.goto();
+      await loginPage.login("emptyuser@rolnopol.demo.pl", "demoPass123");
+
+      await expect.soft(page).toHaveURL(profilePage.PAGE_URL);
+      await expect.soft(profilePage.profileInformationHeading).toBeVisible();
+      await expect.soft(profilePage.updateProfileHeading).toBeVisible();
+      await expect.soft(profilePage.dangerZoneHeading).toBeVisible();
+
+      await profilePage.logout();
+
+      await expect(page).toHaveURL(homePage.PAGE_URL);
+    },
+  );
+});
