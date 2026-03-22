@@ -5,5 +5,9 @@
 		"source.organizeImports": "explicit"
 	},
 	"cSpell.userWords": ["Rolnopol"],
-	"terminal.integrated.defaultProfile.osx": "bash"
+	"terminal.integrated.defaultProfile.osx": "bash",
+	"chat.tools.terminal.autoAppove": {
+		"git add": true,
+		"git commit": true
+	}
 }
