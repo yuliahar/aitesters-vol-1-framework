@@ -42,7 +42,7 @@ More resources and updates on our [GitHub](https://github.com/jaktestowac).
 
 ### AI_Testers
 
-Gain an edge by combining AI knowledge with the most popular tools in the IT market.  
+Gain an edge by combining AI knowledge with the most popular tools in the IT market.
 We'll show you how to accelerate with AI and build a professional test automation framework. 😉
 
 - [AI_Testers](https://aitesters.pl) - Main page about AI_Testers Program
@@ -55,3 +55,22 @@ We'll show you how to accelerate with AI and build a professional test automatio
 - [Playwright GitHub](https://github.com/microsoft/playwright) - Source code and issues
 
 _PS. For more resources and updates, follow us on our [website](https://jaktestowac.pl) and [GitHub](https://github.com/jaktestowac)._
+
+Add history of prompts and instructions for Copilot in the next section.
+
+---
+
+# 🧠 Copilot Prompts History
+
+- "Remove all comments from the codebase/file"
+- "Add setting for VSCode to use default console type Bash"
+- "Add setting for VSCode to auto-approve 'git add' and 'git commit' commands in terminal"
+- "Update the current tests so they refer to the testing site using the baseUrl placed in #file:playwright.config.ts"
+- "Change the test timeout to 5 minutes in the Playwright configuration"
+- "Run the tests in parallel and add retries for CI environment in Playwright configuration"
+- Change this to conventional commit syntax: Refactor example tests to remove unnecessary cases and update title check
+- "Refactor example tests to remove unnecessary cases and update title check"
+- "Open user settings.json file in VSCode and add setting to use default console type as Bash"
+- Make conventional commit
+- Prepare conventional commit instruction to follow this rules when committing changes. Add it to instruction file. Make instruction simple and clear, with examples.
+- "Create simple test plan for application with use of official documentation http://localhost:3000/docs.html"
