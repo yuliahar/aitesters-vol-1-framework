@@ -74,3 +74,4 @@ Add history of prompts and instructions for Copilot in the next section.
 - Make conventional commit
 - Prepare conventional commit instruction to follow this rules when committing changes. Add it to instruction file. Make instruction simple and clear, with examples.
 - "Create simple test plan for application with use of official documentation http://localhost:3000/docs.html"
+- "Add new rule about using tags form #sym:## Test Plan and Tagging System when creating tests and keep this reference updated"
