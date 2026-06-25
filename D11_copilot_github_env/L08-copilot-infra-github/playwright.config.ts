@@ -23,7 +23,7 @@ export default defineConfig({
     },
     {
       name: "smoke-tests",
-      testMatch: ["**/*.smoke.spec.ts"],
+      testMatch: ["**/smoke/**.spec.ts"],
       use: { ...devices["Desktop Chrome"] },
     },
     {

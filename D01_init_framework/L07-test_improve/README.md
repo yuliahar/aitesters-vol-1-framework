@@ -19,7 +19,6 @@ To install and run application, follow instructions in rolnopol README.
 ### Installation and setup
 
 To prepare the project, follow these steps:
-
 - (optional) install VSC recommended plugins
 - install dependencies: `npm install`
 - setup Playwright with: `npx playwright install --with-deps chromium`
