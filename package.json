@@ -1,24 +1,24 @@
 {
-	"name": "aitesters-vol-1-framework",
-	"version": "1.0.0",
-	"description": "©jaktestowac.pl Testoneo SP z o. o. 2026 ⚠️ Only for users of [AI_Testers](https://aitesters.pl/)",
-	"main": "index.js",
-	"scripts": {
-		"test": "npx playwright test"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://jaktestowac-workspace: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@github.com/AI-Testers-pl/aitesters-vol-1-framework.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/AI-Testers-pl/aitesters-vol-1-framework/issues"
-	},
-	"homepage": "https://github.com/AI-Testers-pl/aitesters-vol-1-framework#readme",
-	"devDependencies": {
-		"@playwright/test": "^1.58.2",
-		"@types/node": "^25.5.0"
-	}
+  "name": "aitesters-vol-1-framework",
+  "version": "1.0.0",
+  "description": "©jaktestowac.pl Testoneo SP z o. o. 2026 ⚠️ Only for users of [AI_Testers](https://aitesters.pl/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://jaktestowac-workspace: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@github.com/AI-Testers-pl/aitesters-vol-1-framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AI-Testers-pl/aitesters-vol-1-framework/issues"
+  },
+  "homepage": "https://github.com/AI-Testers-pl/aitesters-vol-1-framework#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^25.5.0"
+  }
 }
