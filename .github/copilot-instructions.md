@@ -31,6 +31,7 @@ Rules:
 - Tags must match the test area (e.g., `@auth` for authentication, `@farm` for farm management)
 - Combine area tags with type tags (e.g., `@auth` + `@login`, `@marketplace` + `@crud`)
 - Do not invent new tags — use only those listed in TEST_PLAN.md
+- New: Use the tag format `#sym:## Test Plan and Tagging System` when creating tests, and keep the reference to [TEST_PLAN.md](../TEST_PLAN.md#test-plan-and-tagging-system) updated if the test plan changes.
 
 Available tag categories from TEST_PLAN.md:
 

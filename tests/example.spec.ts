@@ -1,10 +1,14 @@
 import { expect, test } from '@playwright/test';
 
-test('page should have Rolnopol title', { tag: ['@smoke', '@critical'] }, async ({ page }) => {
-	await page.goto('/');
+test(
+	'page should have Rolnopol title',
+	{ tag: ['@smoke', '@critical'] },
+	async ({ page }) => {
+		await page.goto('/');
 
-	await expect(page).toHaveTitle(/Rolnopol/);
-});
+		await expect(page).toHaveTitle(/Rolnopol/);
+	},
+);
 
 test(
 	'welcome heading is visible',
@@ -20,7 +24,7 @@ test(
 
 test(
 	'login link is visible',
-	{ tag: ['@smoke', '@auth'] },
+	{ tag: ['@smoke', '@navigation'] },
 	async ({ page }) => {
 		await page.goto('/');
 
