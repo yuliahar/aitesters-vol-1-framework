@@ -17,3 +17,13 @@ test(
 		).toBeVisible();
 	},
 );
+
+test(
+	'login link is visible',
+	{ tag: ['@smoke', '@auth'] },
+	async ({ page }) => {
+		await page.goto('/');
+
+		await expect(page.getByRole('link', { name: 'Login' })).toBeVisible();
+	},
+);
