@@ -1,5 +1,11 @@
 # Copilot Instructions
 
+## Playwright Test Framework
+
+This repository uses the Playwright Test framework for automated tests.
+
+When creating or modifying tests, review [playwright.config.ts](../playwright.config.ts) first so the test follows the current project settings, including `baseURL`, `timeout`, `retries`, `projects`, and reporter behavior.
+
 ## Conventional Commits
 
 Commit messages must use the format: `type(scope): description`
