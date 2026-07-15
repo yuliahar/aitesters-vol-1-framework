@@ -26,6 +26,53 @@ fix(tests): correct flaky timeout in smoke suite
 chore: remove unused lesson directories
 ```
 
+## Arrange Act Assert
+
+Structure every test using the AAA pattern with `// Arrange`, `// Act`, and `// Assert` comments.
+
+Rules:
+
+- **Arrange** — navigation, test data setup, and any preconditions
+- **Act** — user interactions (fill, click, etc.); omit this section when the test has no interaction
+- **Assert** — all `expect` calls
+
+Example:
+
+```typescript
+test(
+  'should register a new user successfully',
+  { tag: ['@registration', '@smoke'] },
+  async ({ page }) => {
+    // Arrange
+    await page.goto('/register.html');
+    const testEmail = `user${Date.now()}@example.com`;
+
+    // Act
+    await page.getByTestId('email-input').fill(testEmail);
+    await page.getByTestId('register-submit-btn').click();
+
+    // Assert
+    await expect(page).toHaveURL(/\/login\.html$/);
+  },
+);
+```
+
+When there is no user interaction (e.g. a field visibility check), omit `// Act`:
+
+```typescript
+test(
+  'should show email input on registration form',
+  { tag: ['@registration', '@ui'] },
+  async ({ page }) => {
+    // Arrange
+    await page.goto('/register.html');
+
+    // Assert
+    await expect(page.getByTestId('email-input')).toBeVisible();
+  },
+);
+```
+
 ## Test Tagging
 
 When creating or modifying tests, always use tags defined in [TEST_PLAN.md](../TEST_PLAN.md#test-plan-and-tagging-system).
