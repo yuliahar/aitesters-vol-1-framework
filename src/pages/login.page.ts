@@ -1,8 +1,9 @@
 import { Locator, Page } from '@playwright/test';
+import { PAGE_URLS } from '../constants/pageUrls';
 import { BasePage } from './base.page';
 
 export class LoginPage extends BasePage {
-	readonly PAGE_URL = '/login.html';
+	readonly PAGE_URL = PAGE_URLS.LOGIN;
 	readonly loginSubtitle: Locator;
 
 	constructor(page: Page) {
