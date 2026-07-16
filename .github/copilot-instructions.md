@@ -1,108 +1,73 @@
-# Copilot Instructions
+# Copilot Instructions for rolnopol-atf
 
-## Playwright Test Framework
+## Important: Follow Coding Standards
 
-This repository uses the Playwright Test framework for automated tests.
+**Always refer to and follow the guidelines in `CODING_STANDARDS.md`** for:
 
-When creating or modifying tests, review [playwright.config.ts](../playwright.config.ts) first so the test follows the current project settings, including `baseURL`, `timeout`, `retries`, `projects`, and reporter behavior.
+- Page Object Pattern implementation
+- Test structure (Arrange-Act-Assert pattern)
+- Locator strategies
+- Code organization and best practices
 
 ## Conventional Commits
 
-Commit messages must use the format: `type(scope): description`
-
-Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `ci`, `perf`
-
-Rules:
-
-- Lowercase type and description, imperative mood, no period
-- Scope is optional (e.g., `tests`, `config`, `api`)
-- Header under 72 characters
-
-Examples:
+Use this format for all commit messages:
 
 ```
-feat(api): add user authentication endpoint
-fix(tests): correct flaky timeout in smoke suite
-chore: remove unused lesson directories
+<type>: <description>
 ```
 
-## Arrange Act Assert
+### Types
 
-Structure every test using the AAA pattern with `// Arrange`, `// Act`, and `// Assert` comments.
+- **feat**: New feature or test
+- **fix**: Bug fix
+- **docs**: Documentation changes
+- **test**: Adding or updating tests
+- **chore**: Maintenance (dependencies, config, etc.)
 
-Rules:
+### Examples
 
-- **Arrange** — navigation, test data setup, and any preconditions
-- **Act** — user interactions (fill, click, etc.); omit this section when the test has no interaction
-- **Assert** — all `expect` calls
+```
+feat: add smoke test for homepage title
+fix: correct login button selector
+docs: update README with setup instructions
+test: add user authentication tests
+chore: update playwright to v1.40.0
+```
 
-Example:
+### Rules
+
+1. Use lowercase
+2. No period at the end
+3. Keep under 50 characters
+4. Use imperative mood ("add" not "added")
+
+## Test Framework
+
+This project uses **Playwright Test** framework for end-to-end testing. Always review `playwright.config.ts` when creating tests to understand:
+
+- Base URL configuration
+- Timeout settings
+- Browser configurations
+- Test directory structure
+- Reporter settings
+
+## Test Creation Guidelines
+
+When creating or updating tests, always use appropriate tags from the Test Plan and Tagging System (see TEST_PLAN.md):
+
+### Examples
 
 ```typescript
-test(
-  'should register a new user successfully',
-  { tag: ['@registration', '@smoke'] },
-  async ({ page }) => {
-    // Arrange
-    await page.goto('/register.html');
-    const testEmail = `user${Date.now()}@example.com`;
-
-    // Act
-    await page.getByTestId('email-input').fill(testEmail);
-    await page.getByTestId('register-submit-btn').click();
-
-    // Assert
-    await expect(page).toHaveURL(/\/login\.html$/);
-  },
-);
+test('should display title "Rolnopol" on homepage', {
+	tag: ['@smoke', '@critical'],
+});
+test('user registration with valid data', {
+	tag: ['@auth', '@registration', '@happy-path'],
+});
+test('prevent purchase with insufficient funds', {
+	tag: ['@marketplace', '@validation', '@edge-case'],
+});
 ```
 
-When there is no user interaction (e.g. a field visibility check), omit `// Act`:
-
-```typescript
-test(
-  'should show email input on registration form',
-  { tag: ['@registration', '@ui'] },
-  async ({ page }) => {
-    // Arrange
-    await page.goto('/register.html');
-
-    // Assert
-    await expect(page.getByTestId('email-input')).toBeVisible();
-  },
-);
-```
-
-## Test Tagging
-
-When creating or modifying tests, always use tags defined in [TEST_PLAN.md](../TEST_PLAN.md#test-plan-and-tagging-system).
-
-Rules:
-
-- Every test must have at least one tag from the test plan
-- Use `test.describe` or `test` with tag annotations: `{ tag: ['@smoke', '@critical'] }`
-- Tags must match the test area (e.g., `@auth` for authentication, `@farm` for farm management)
-- Combine area tags with type tags (e.g., `@auth` + `@login`, `@marketplace` + `@crud`)
-- Do not invent new tags — use only those listed in TEST_PLAN.md
-- New: Use the tag format `#sym:## Test Plan and Tagging System` when creating tests, and keep the reference to [TEST_PLAN.md](../TEST_PLAN.md#test-plan-and-tagging-system) updated if the test plan changes.
-
-Available tag categories from TEST_PLAN.md:
-
-- **Smoke**: `@smoke`, `@critical`, `@navigation`, `@api`
-- **Authentication**: `@auth`, `@registration`, `@login`, `@session`, `@logout`, `@rbac`, `@permissions`, `@validation`
-- **Farm Management**: `@farm`, `@crud`, `@fields`, `@animals`, `@staff`, `@assignments`, `@business-logic`, `@edge-case`
-- **Marketplace**: `@marketplace`, `@offers`, `@purchase`, `@happy-path`, `@ownership`, `@cancel`, `@status`
-- **Financial**: `@financial`, `@balance`, `@history`, `@transfer`, `@transactions`
-- **E2E**: `@e2e`, `@farm-setup`, `@marketplace-flow`, `@user-journey`
-
-Example:
-
-```typescript
-test(
-	'user can login with valid credentials',
-	{ tag: ['@auth', '@login', '@happy-path'] },
-	async ({ page }) => {
-		// test implementation
-	},
-);
-```
+Keep tags aligned with TEST_PLAN.md test cases for consistency.
