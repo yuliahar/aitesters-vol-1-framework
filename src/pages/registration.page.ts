@@ -39,7 +39,6 @@ export class RegistrationPage extends BasePage {
 		await this.submitButton.click();
 	}
 
-	// `password` is required; `displayName` is optional.
 	async register(email: string, password: string, displayName?: string) {
 		await this.fillEmail(email);
 		if (displayName !== undefined && displayName !== null) {
