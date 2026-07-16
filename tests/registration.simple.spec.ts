@@ -6,17 +6,14 @@ test(
 	'should register a new user successfully',
 	{ tag: ['@registration', '@smoke'] },
 	async ({ page }) => {
-		// Arrange
 		const registration = new RegistrationPage(page);
 		await registration.goto();
 		const testEmail = generateTestEmail();
 		const testPassword = 'TestPass123';
 		const testDisplayName = 'Test User';
 
-		// Act
 		await registration.register(testEmail, testPassword, testDisplayName);
 
-		// Assert
 		await expect(registration.registrationSuccessMessage).toBeVisible();
 		// app redirects after 2 s notification delay
 		await expect(page).toHaveURL(/\/login\.html$/, { timeout: 8000 });
@@ -28,11 +25,9 @@ test(
 	'should show email placeholder on registration form',
 	{ tag: ['@registration', '@ui'] },
 	async ({ page }) => {
-		// Arrange
 		const registration = new RegistrationPage(page);
 		await registration.goto();
 
-		// Assert
 		await expect(registration.emailInput).toBeVisible();
 		await expect(registration.emailInput).toHaveAttribute(
 			'placeholder',
@@ -45,11 +40,9 @@ test(
 	'should have optional display name field on registration form',
 	{ tag: ['@registration', '@ui'] },
 	async ({ page }) => {
-		// Arrange
 		const registration = new RegistrationPage(page);
 		await registration.goto();
 
-		// Assert
 		await expect(registration.displayNameInput).toBeVisible();
 	},
 );
@@ -58,11 +51,9 @@ test(
 	'should have password field with minimum 3 character requirement on registration form',
 	{ tag: ['@registration', '@ui'] },
 	async ({ page }) => {
-		// Arrange
 		const registration = new RegistrationPage(page);
 		await registration.goto();
 
-		// Assert
 		await expect(registration.passwordInput).toBeVisible();
 	},
 );

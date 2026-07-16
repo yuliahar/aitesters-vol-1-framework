@@ -2,7 +2,7 @@
 
 ## Test Structure: Arrange-Act-Assert (AAA)
 
-All tests should follow the **Arrange-Act-Assert (AAA)** pattern with clear comment markers:
+All tests should follow the **Arrange-Act-Assert (AAA)** pattern:
 
 - **Arrange**: Set up test data, create page objects, prepare the environment
 - **Act**: Perform the action being tested
@@ -10,23 +10,20 @@ All tests should follow the **Arrange-Act-Assert (AAA)** pattern with clear comm
 
 ### Guidelines
 
-- Use `// Arrange`, `// Act`, and `// Assert` comments to mark each section
-- For simple tests, you can combine `// Act & Assert` when the action and verification are tightly coupled
+- Separate the three phases with blank lines — no `// Arrange`, `// Act`, `// Assert` comment markers needed
+- Structure should be self-evident from the code
 - Keep each section focused and clear
 
 ### Example
 
 ```typescript
 test('should register new user', async ({ page }) => {
-	// Arrange
 	const registerPage = new RegisterPage(page);
 	const email = 'user@example.com';
 	const password = 'password123';
 
-	// Act
 	await registerPage.register(email, password);
 
-	// Assert
 	await expect(registerPage.successMessage).toBeVisible();
 });
 ```
@@ -45,20 +42,41 @@ test('should register new user', async ({ page }) => {
 - Page Objects: Define locators and action methods
 - Test files: Use Page Objects and add assertions
 
-### Basic Structure
+### BasePage
+
+All Page Objects extend `BasePage`, which owns `page: Page`, `PAGE_URL`, and `goto()`.
+Each page declares its route as `readonly PAGE_URL = PAGE_URLS.<KEY>` — a value from the centralized constants.
 
 ```typescript
-export class PageName {
+// src/constants/pageUrls.ts
+export const PAGE_URLS = {
+	HOME: '/',
+	LOGIN: '/login.html',
+	// ...
+} as const;
+
+// src/pages/base.page.ts
+export abstract class BasePage {
+	abstract readonly PAGE_URL: string;
 	readonly page: Page;
-	readonly elementName: Locator;
 
 	constructor(page: Page) {
 		this.page = page;
-		this.elementName = page.getByTestId('element-id');
 	}
 
 	async goto() {
-		await this.page.goto('/page-path');
+		await this.page.goto(this.PAGE_URL);
+	}
+}
+
+// src/pages/example.page.ts
+export class ExamplePage extends BasePage {
+	readonly PAGE_URL = PAGE_URLS.EXAMPLE;
+	readonly elementName: Locator;
+
+	constructor(page: Page) {
+		super(page);
+		this.elementName = page.getByTestId('element-id');
 	}
 
 	async performAction(param: string) {
@@ -71,6 +89,7 @@ export class PageName {
 
 **✅ DO:**
 
+- Extend `BasePage` and declare `readonly PAGE_URL = PAGE_URLS.<KEY>`
 - Use `readonly` for properties
 - Prefer `getByTestId()` for locators (for stability and resilience to UI changes); use `getByRole()` or similar strategies when testing accessibility or user-facing roles
 - Create methods for user actions
@@ -78,6 +97,8 @@ export class PageName {
 
 **❌ DON'T:**
 
+- Duplicate `page` property or `goto()` — they live in `BasePage`
+- Hard-code URL strings in page objects — use `PAGE_URLS` constants
 - Include `expect()` in Page Objects
 - Add test logic or validations in Page Objects
 
@@ -97,13 +118,10 @@ async register(email: string, password: string) {
 
 ```typescript
 test('should register new user', async ({ page }) => {
-	// Arrange
 	const registerPage = new RegisterPage(page);
 
-	// Act
 	await registerPage.register('user@example.com', 'password123');
 
-	// Assert
 	await expect(registerPage.successMessage).toBeVisible();
 });
 ```
