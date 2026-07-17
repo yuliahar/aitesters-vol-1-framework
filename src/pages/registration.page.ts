@@ -10,6 +10,7 @@ export class RegistrationPage extends BasePage {
 	readonly submitButton: Locator;
 	readonly registrationSubtitle: Locator;
 	readonly registrationSuccessMessage: Locator;
+	readonly passwordValidationError: Locator;
 
 	constructor(page: Page) {
 		super(page);
@@ -21,6 +22,7 @@ export class RegistrationPage extends BasePage {
 		this.registrationSuccessMessage = page.getByText(
 			'Registration successful!',
 		);
+		this.passwordValidationError = page.getByRole('alert');
 	}
 
 	async fillEmail(email: string) {

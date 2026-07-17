@@ -57,3 +57,21 @@ test(
 		await expect(registration.passwordInput).toBeVisible();
 	},
 );
+
+test(
+	'should reject password shorter than 3 characters',
+	{ tag: ['@registration', '@validation'] },
+	async ({ page }) => {
+		const registration = new RegistrationPage(page);
+		await registration.goto();
+
+		await registration.fillEmail('test@test.com');
+		await registration.fillPassword('ab');
+		await registration.submit();
+
+		await expect(registration.passwordValidationError).toBeVisible();
+		await expect(registration.passwordValidationError).toHaveText(
+			'Password must be at least 3 characters',
+		);
+	},
+);
