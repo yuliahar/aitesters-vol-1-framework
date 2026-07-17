@@ -30,7 +30,7 @@ Testing strategy for Rolnopol agricultural management system based on http://loc
 - [x] Display name field is visible on registration form `@registration` `@ui`
 - [ ] Registration succeeds without display name (field is optional) `@registration` `@validation`
 - [x] Password field is visible on registration form `@registration` `@ui`
-- [ ] Password validation rejects input shorter than 3 characters `@registration` `@validation`
+- [x] Password validation rejects input shorter than 3 characters `@registration` `@validation`
 - [ ] Login with valid credentials redirects to /profile.html `@auth` `@login`
 - [ ] Login sets rolnopolToken and rolnopolLoginTime cookies `@auth` `@login` `@session`
 - [ ] Token usable in Authorization header (Bearer) `@auth` `@session`
