@@ -9,5 +9,6 @@
 	"chat.tools.terminal.autoAppove": {
 		"git add": true,
 		"git commit": true
-	}
+	},
+	"githubPullRequests.remotes": ["origin"]
 }
