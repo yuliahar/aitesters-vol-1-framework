@@ -1,10 +1,114 @@
-©jaktestowac.pl Testoneo SP z o. o. 2026
-⚠️ Only for users of [AI_Testers](https://aitesters.pl/)
+# AI_Testers — Vol. 1 Framework
 
-# All lessons in one repository
+> ©jaktestowac.pl Testoneo SP z o. o. 2026
+> ⚠️ Only for users of [AI_Testers](https://aitesters.pl/)
 
-Extract each lesson as separate project in new folder
-Initialize repository and follow README.md for each project
+A Playwright + TypeScript test-automation framework built step by step during the **AI_Testers** program. The repository doubles as:
+
+- **A working framework** at the root — page objects, smoke and functional tests, CI, and coding standards you can run today.
+- **A lesson archive** under [`lessons/`](lessons/) — each lesson captured as a self-contained project so you can follow the framework's evolution day by day.
+
+The system under test is **Rolnopol**, an agricultural management demo app served locally at `http://localhost:3000`.
+
+---
+
+## 📑 Table of Contents
+
+- [Getting Started](#-getting-started)
+- [Running Tests](#-running-tests)
+- [Project Structure](#-project-structure)
+- [Working with the Lessons](#-working-with-the-lessons)
+- [Conventions](#-conventions)
+- [Contact & Support](#-contact--support)
+- [Learning Resources](#-learning-resources)
+- [Copilot Prompts History](#-copilot-prompts-history)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18+ (LTS recommended)
+- The **Rolnopol** application running locally on `http://localhost:3000` (provided with the course)
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Install Playwright browsers
+npx playwright install
+```
+
+---
+
+## 🧪 Running Tests
+
+```bash
+# Run the whole suite (headless)
+npm test
+
+# Run in headed mode
+npx playwright test --headed
+
+# Run a single spec file
+npx playwright test tests/main.spec.ts
+
+# Filter by tag (e.g. only smoke tests)
+npx playwright test --grep @smoke
+
+# Open the HTML report from the last run
+npx playwright show-report
+```
+
+Configuration lives in [`playwright.config.ts`](playwright.config.ts): tests run against `baseURL` `http://localhost:3000`, in parallel, with a 10s timeout and traces enabled. In CI the suite uses a single worker and retries failures twice.
+
+---
+
+## 📁 Project Structure
+
+```text
+.
+├── src/
+│   ├── constants/      # Shared constants (e.g. page URLs)
+│   ├── helpers/        # Reusable test helpers
+│   └── pages/          # Page Object Models (base, home, login, registration, docs, swagger)
+├── tests/              # Test specs
+├── lessons/            # Per-lesson snapshots of the framework (see below)
+├── .github/            # Copilot instructions, prompts, and CI workflow
+├── CODING_STANDARDS.md # Test structure and style conventions
+├── TEST_PLAN.md        # Rolnopol test plan with tagging system
+└── playwright.config.ts
+```
+
+---
+
+## 📚 Working with the Lessons
+
+Each folder under [`lessons/`](lessons/) is an independent project that captures the framework at a specific point in the course, grouped by day (`D01`, `D03`, …) and lesson (`L05`, `L06`, …).
+
+To work through a lesson:
+
+1. Open the lesson folder as its own project.
+2. Install dependencies and follow the `README.md` inside that folder.
+
+```bash
+cd lessons/D01_init_framework/L09-instructions_for_ai
+npm install
+npm test
+```
+
+---
+
+## 📐 Conventions
+
+- **Test structure** — tests follow the Arrange-Act-Assert (AAA) pattern. See [`CODING_STANDARDS.md`](CODING_STANDARDS.md).
+- **Test plan & tags** — coverage and tag categories (`@smoke`, `@critical`, `@auth`, …) are tracked in [`TEST_PLAN.md`](TEST_PLAN.md).
+- **Commits** — use [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`).
+
+---
 
 # 📞 Contact & Support
 
@@ -56,11 +160,11 @@ We'll show you how to accelerate with AI and build a professional test automatio
 
 _PS. For more resources and updates, follow us on our [website](https://jaktestowac.pl) and [GitHub](https://github.com/jaktestowac)._
 
-Add history of prompts and instructions for Copilot in the next section.
-
 ---
 
 # 🧠 Copilot Prompts History
+
+A running log of prompts and instructions used with Copilot while building this framework:
 
 - "Remove all comments from the codebase/file"
 - "Add setting for VSCode to use default console type Bash"
